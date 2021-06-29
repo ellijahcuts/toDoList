@@ -52,6 +52,25 @@ function App() {
         setTasks({...tasks})
     }
 
+    function changeTaskTitle(taskID: string, title: string, todoList_ID: string) {
+        tasks[todoList_ID] = tasks[todoList_ID].map(t => {
+            if (t.id === taskID) {
+                return {...t, title: title}
+            }
+            return t
+        })
+        setTasks({...tasks})
+    }
+
+    function changeTodoListTitle(title: string, todoList_ID: string) {
+        setTodoLists(todoLists.map(tl => {
+            if (tl.id === todoList_ID) {
+                return {...tl, title: title}
+            }
+            return tl
+        }))
+    }
+
     function removeTask(taskID: string, todoList_ID: string) {
         tasks[todoList_ID] = tasks[todoList_ID].filter(t => t.id !== taskID);
         setTasks({...tasks})
@@ -62,15 +81,16 @@ function App() {
         tasks[todoList_ID] = [newTask, ...tasks[todoList_ID]];
         setTasks({...tasks});
     }
-    function addTodoList(title:string){
-        const newTodoList_ID=v1()
+
+    function addTodoList(title: string) {
+        const newTodoList_ID = v1()
         const newTodoList: ToDoListType = {
             id: newTodoList_ID,
-            title:title,
+            title: title,
             filter: "all"
         }
         setTodoLists([...todoLists, newTodoList])
-        setTasks({...tasks,[newTodoList.id]:[]})
+        setTasks({...tasks, [newTodoList.id]: []})
     }
 
     function changeTodoListFilter(value: FilterValuesType, todoList_ID: string) {
@@ -81,7 +101,6 @@ function App() {
         setTodoLists(todoLists.filter(tl => tl.id !== todoList_ID))
         delete tasks[todoList_ID]
     }
-
 
     const todoListsComponents = todoLists.map(tl => {
         let tasksForTodolist = tasks[tl.id];
@@ -102,8 +121,10 @@ function App() {
                     removeTask={removeTask}
                     changeTodoListFilter={changeTodoListFilter}
                     addTask={addTask}
-                    taskStatus={changeTaskStatus}
+                    changeTaskStatus={changeTaskStatus}
                     removeTodoList={removeTodoList}
+                    changeTaskTitle={changeTaskTitle}
+                    changeTodoListTitle={changeTodoListTitle}
                 />
             </div>
         );

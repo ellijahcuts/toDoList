@@ -7,7 +7,7 @@ type AddItemFormPropsType={
 export function AddItemForm(props:AddItemFormPropsType) {
     const [title, setTitle] = useState("")
     let [error, setError] = useState<boolean>(false)
-    const errorMessage= 'Title is required!'
+    const errorMessage = 'Title is required!'
 
 
     const addItem = () => {
