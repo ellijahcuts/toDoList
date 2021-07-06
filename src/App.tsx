@@ -3,6 +3,8 @@ import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from "./components/ItemForm/AddItemForm";
+import {AppBar, Toolbar, Button, IconButton, Typography, Grid, Container} from "@material-ui/core";
+import {List, Menu} from "@material-ui/icons";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -14,6 +16,10 @@ export type ToDoListType = {
 
 export type TaskStateType = {
     [key: string]: Array<TaskType>
+}
+
+function MenuIcon() {
+    return null;
 }
 
 function App() {
@@ -131,10 +137,30 @@ function App() {
     })
     return (
         <div className="App">
-            <AddItemForm addItem={addTodoList}/>
-            {todoListsComponents}
+            <AppBar position="static">
+                <Toolbar style={{justifyContent: "space-between"}}>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <List/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        <h2>ToDoLists</h2>
+                    </Typography>
+                    <Button
+                        variant={"outlined"}
+                        color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+            <Container fixed>
+                <Grid container>
+                    <AddItemForm addItem={addTodoList}/>
+                </Grid>
+                <Grid container>
+                    {todoListsComponents}
+                </Grid>
+            </Container>
         </div>)
 
 }
 
 export default App;
+

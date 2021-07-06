@@ -1,11 +1,3 @@
-.App {
-    padding: 30px;
-    display: flex;
-}
-
-.App > div {
-    margin-right: 50px;
-}
 
 .error {
     border: red 1px solid;
@@ -21,7 +13,7 @@
 }
 
 .isDone {
-    opacity: 0.35;
+    opacity: 0.2;
 }
 
 .error:focus {

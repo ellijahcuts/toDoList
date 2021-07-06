@@ -5,7 +5,7 @@ type propsType ={
     value: string
 }
 
-export const Button = (props:propsType)=>{
+export const ButtonNotUsed = (props:propsType)=>{
     const onClickHandler =()=>{
         props.callBack()
     }
