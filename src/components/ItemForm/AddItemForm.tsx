@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {IconButton, TextField} from "@material-ui/core";
-import {AddBox, AddBoxRounded, AddBoxSharp, AddBoxTwoTone} from "@material-ui/icons";
+import {AddBox} from "@material-ui/icons";
 
 type AddItemFormPropsType={
     addItem: (title:string) => void
@@ -22,6 +22,7 @@ export function AddItemForm(props:AddItemFormPropsType) {
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
+        setError(false)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(false)
@@ -44,7 +45,7 @@ export function AddItemForm(props:AddItemFormPropsType) {
             />
             <IconButton
                 size={"small"}
-                color={"default"}
+                color={"primary"}
                 onClick={addItem}><AddBox fontSize={"large"}/></IconButton>
         </div>
     )
