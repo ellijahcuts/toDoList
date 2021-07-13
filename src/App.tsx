@@ -18,9 +18,6 @@ export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
-function MenuIcon() {
-    return null;
-}
 
 function App() {
     const todoList_ID1 = v1()
