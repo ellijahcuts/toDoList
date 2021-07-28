@@ -1,18 +1,18 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
-import {v1} from 'uuid';
 import {AddItemForm} from "./components/ItemForm/AddItemForm";
 import {AppBar, Toolbar, Button, IconButton, Typography, Grid, Container, Paper} from "@material-ui/core";
-import {List, Menu} from "@material-ui/icons";
+import {List} from "@material-ui/icons";
 import {
     AddTodoListAC,
     ChangeTodoFilterAC,
     ChangeTodoTitleAC,
     RemoveTodoListAC,
-    toDoListsReducer
 } from "./store/ToDoLists-Reducer";
-import {addTaskAC, changeStatusTaskAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./store/Tasks-Reducer";
+import {addTaskAC, changeStatusTaskAC, changeTaskTitleAC, removeTaskAC} from "./store/Tasks-Reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./store/store";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -27,73 +27,52 @@ export type TaskStateType = {
 }
 
 
-function AppWithReducers() {
-    const todoList_ID1 = v1()
-    const todoList_ID2 = v1()
+function AppWithRedux() {
 
-    const [todoLists, dispatchToTodoLists] = useReducer(toDoListsReducer,[
-        {id: todoList_ID1, title: "What to learn", filter: "all"},
-        {id: todoList_ID2, title: "What to buy", filter: "all"}
-    ])
-    const [tasks, dispatchToTasks] = useReducer(tasksReducer,{
-            [todoList_ID1]: [
-                {id: v1(), title: "HTML&CSS", isDone: true},
-                {id: v1(), title: "JS", isDone: true},
-                {id: v1(), title: "ReactJS", isDone: false},
-                {id: v1(), title: "Rest API", isDone: false},
-                {id: v1(), title: "GraphQL", isDone: false},
-            ],
-            [todoList_ID2]: [
-                {id: v1(), title: "Bike", isDone: true},
-                {id: v1(), title: "Car", isDone: true},
-                {id: v1(), title: "Iphone 13 pro", isDone: false},
-                {id: v1(), title: "BTC-bitcoin", isDone: false},
-                {id: v1(), title: "license for WebStorm", isDone: false},
-            ],
-        }
-    )
+    let todoLists = useSelector<AppRootStateType,ToDoListType[]>(state=>state.todolist)
+    let tasks = useSelector<AppRootStateType,TaskStateType>(state=>state.tasks)
+
+    const dispatch = useDispatch()
 
 
     function changeTaskStatus(taskID: string, isDone: boolean, todoList_ID: string) {
         const action = changeStatusTaskAC(taskID, isDone, todoList_ID)
-        dispatchToTasks(action)
+        dispatch(action)
     }
 
     function changeTaskTitle(taskID: string, title: string, todoList_ID: string) {
         const action = changeTaskTitleAC(taskID, title, todoList_ID)
-        dispatchToTasks(action)
+        dispatch(action)
     }
 
     function changeTodoListTitle(title: string, todoList_ID: string) {
         const action = ChangeTodoTitleAC(title, todoList_ID)
-        dispatchToTodoLists(action)
+        dispatch(action)
     }
 
     function removeTask(taskID: string, todoList_ID: string) {
         const action = removeTaskAC(taskID,todoList_ID)
-        dispatchToTasks(action)
+        dispatch(action)
     }
 
     function addTask(title: string, todoList_ID: string) {
         const action = addTaskAC(title,todoList_ID)
-        dispatchToTasks(action)
+        dispatch(action)
     }
 
     function addTodoList(title: string) {
         const action = AddTodoListAC(title)
-        dispatchToTodoLists(action)
-        dispatchToTasks(action)
+        dispatch(action)
     }
 
     function changeTodoListFilter(value: FilterValuesType, todoList_ID: string) {
         const action = ChangeTodoFilterAC(todoList_ID,value)
-        dispatchToTodoLists(action)
+        dispatch(action)
     }
 
     function removeTodoList(todoList_ID: string) {
         const action = RemoveTodoListAC(todoList_ID)
-        dispatchToTodoLists(action)
-        dispatchToTasks(action)
+        dispatch(action)
     }
 
     const todoListsComponents = todoLists.map(tl => {
@@ -152,5 +131,5 @@ function AppWithReducers() {
 
 }
 
-export default AppWithReducers;
+export default AppWithRedux;
 
