@@ -4,8 +4,8 @@ import {AddItemForm} from "./components/ItemForm/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan/EditableSpan";
 import {Button, Checkbox, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
-import {Task} from "./Task";
-import {TaskWithDispatch} from "./TaskWithDispatch";
+import {Task} from "./components/Task/Task";
+import {TaskWithDispatch} from "./components/Task/TaskWithDispatch";
 
 
 export type TaskType = {
@@ -77,14 +77,7 @@ export const Todolist = React.memo(function (props: PropsType) {
         <ul style={{listStyle: "none", paddingLeft: "0"}}>
             {
                 tasksForTodolist.map(t => {
-                    return <TaskWithDispatch key={t.id} todoList_ID={props.todoList_ID} task={t}/>
-                    /*<Task key={t.id}
-                                 task={t}
-                                 todoList_ID={props.todoList_ID}
-                                 removeTask={props.removeTask}
-                                 changeTaskTitle={props.changeTaskTitle}
-                                 changeTaskStatus={props.changeTaskStatus}
-                    />*/
+                    return <TaskWithDispatch key={t.id}  todoList_ID={props.todoList_ID} task={t}/>
                 })
             }
         </ul>
