@@ -52,6 +52,6 @@ export const TaskWithDispatch = React.memo((props: TaskPropsType) => {
             ><Delete style={{color: "black"}} fontSize={"small"}/></IconButton>
         </li>
     )
-})
+});
 
 
