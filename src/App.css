@@ -1,22 +1,26 @@
+/*
+.App {
+  padding: 30px;
+  display: flex;
+}
+
+.App > div {
+  margin-right: 50px;
+}
 
 .error {
-    border: red 1px solid;
+  border: red 1px solid;
 }
 
-.errorMessage {
-    color: red;
+.error-message {
+  color: red;
 }
 
-.activeFilter {
-    background-color: #00d4ff;
-    border: black solid 3px;
+.active-filter {
+  background-color: aquamarine;
 }
 
-.isDone {
-    opacity: 0.2;
+.is-done {
+  opacity: 0.5;
 }
-
-.error:focus {
-    outline: none;
-}
-
+*/
